@@ -1,13 +1,15 @@
 package fileInput;
 
+import database.user.Credentials;
+
 public class UserInput {
-    private CredentialsInput credentials;
+    private Credentials credentials;
 
     /* Getters and Setters */
-    public CredentialsInput getCredentials() {
+    public Credentials getCredentials() {
         return credentials;
     }
-    public void setCredentials(CredentialsInput credentials) {
+    public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
 }

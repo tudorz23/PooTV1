@@ -7,8 +7,8 @@ public class MovieInput {
     private int year;
     private int duration;
     private ArrayList<String> genres;
-    private ArrayList<String> countriesBanned;
     private ArrayList<String> actors;
+    private ArrayList<String> countriesBanned;
 
     /* Getters and Setters */
     public String getName() {
@@ -35,17 +35,16 @@ public class MovieInput {
     public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
-    public ArrayList<String> getCountriesBanned() {
-        return countriesBanned;
-    }
-    public void setCountriesBanned(ArrayList<String> countriesBanned) {
-        this.countriesBanned = countriesBanned;
-    }
     public ArrayList<String> getActors() {
         return actors;
     }
     public void setActors(ArrayList<String> actors) {
         this.actors = actors;
     }
-
+    public ArrayList<String> getCountriesBanned() {
+        return countriesBanned;
+    }
+    public void setCountriesBanned(ArrayList<String> countriesBanned) {
+        this.countriesBanned = countriesBanned;
+    }
 }

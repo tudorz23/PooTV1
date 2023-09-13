@@ -1,11 +1,13 @@
 package fileInput;
 
+import database.user.Credentials;
+
 public class ActionInput {
     private String type;
     private String page;
     private String movie;
     private String feature;
-    private CredentialsInput credentials;
+    private Credentials credentials;
     private String startsWith;
     private FiltersInput filters;
     private String count;
@@ -36,10 +38,10 @@ public class ActionInput {
     public void setFeature(String feature) {
         this.feature = feature;
     }
-    public CredentialsInput getCredentials() {
+    public Credentials getCredentials() {
         return credentials;
     }
-    public void setCredentials(CredentialsInput credentials) {
+    public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
     }
     public String getStartsWith() {
