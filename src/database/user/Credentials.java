@@ -1,6 +1,6 @@
-package fileInput;
+package database.user;
 
-public class CredentialsInput {
+public class Credentials {
     private String name;
     private String password;
     private String accountType;
