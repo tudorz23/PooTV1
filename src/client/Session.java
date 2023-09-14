@@ -2,9 +2,9 @@ package client;
 
 import database.Database;
 import database.Movie;
-import database.pages.Page;
-import database.pages.PageFactory;
-import database.user.User;
+import pages.Page;
+import pages.PageFactory;
+import database.User;
 import utils.PageName;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ public class Session {
         // Proof that the Database Singleton implementation works.
         database = Database.getInstance();
         currUser = null;
+        currMovieList = new ArrayList<>();
         pageFactory = new PageFactory();
         currPage = pageFactory.createPage(PageName.UNAUTHENTICATED);
     }
@@ -42,5 +43,8 @@ public class Session {
     }
     public void setCurrMovieList(ArrayList<Movie> currMovieList) {
         this.currMovieList = currMovieList;
+    }
+    public PageFactory getPageFactory() {
+        return pageFactory;
     }
 }

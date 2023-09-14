@@ -1,7 +1,4 @@
-package database.user;
-
-import database.Movie;
-import fileInput.MovieInput;
+package database;
 
 import java.util.ArrayList;
 

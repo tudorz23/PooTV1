@@ -1,4 +1,4 @@
-package database.user;
+package database;
 
 import fileInput.CredentialsInput;
 

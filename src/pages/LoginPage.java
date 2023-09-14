@@ -1,12 +1,12 @@
-package database.pages;
+package pages;
 
 import utils.PageName;
 
-public class RegisterPage extends Page {
+public class LoginPage extends Page {
     /* Constructor */
-    public RegisterPage() {
+    public LoginPage() {
         super();
-        setType(PageName.REGISTER);
+        setType(PageName.LOGIN);
         setNextPages();
     }
 

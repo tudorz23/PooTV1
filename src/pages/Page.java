@@ -1,11 +1,10 @@
-package database.pages;
+package pages;
 
-import database.Movie;
 import utils.PageName;
 
 import java.util.ArrayList;
 
-public class Page {
+public abstract class Page {
     private final ArrayList<PageName> nextPages;
     private PageName type;
 
@@ -13,6 +12,8 @@ public class Page {
     public Page() {
         nextPages = new ArrayList<>();
     }
+
+    public abstract void changeToThis();
 
     /* Getters and Setters */
     public ArrayList<PageName> getNextPages() {

@@ -1,4 +1,4 @@
-package database.pages;
+package pages;
 
 import database.Movie;
 import utils.PageName;

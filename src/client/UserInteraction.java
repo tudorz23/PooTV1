@@ -1,20 +1,16 @@
 package client;
 
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import commands.CommandFactory;
 import commands.ICommand;
 import database.Database;
 import database.Movie;
-import database.user.Credentials;
-import database.user.User;
+import database.Credentials;
+import database.User;
 import fileInput.ActionInput;
 import fileInput.Input;
 import fileInput.MovieInput;
 import fileInput.UserInput;
-import fileOutput.PrinterJson;
-
-import java.util.ArrayList;
 
 public class UserInteraction {
     private Session session;

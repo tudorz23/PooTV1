@@ -1,4 +1,4 @@
-package database.pages;
+package pages;
 
 import utils.PageName;
 

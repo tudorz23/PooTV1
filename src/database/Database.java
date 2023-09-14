@@ -1,7 +1,5 @@
 package database;
 
-import database.user.User;
-
 import java.util.ArrayList;
 
 public class Database {

@@ -1,18 +1,18 @@
-package database.pages;
+package pages;
 
 import utils.PageName;
 
-public class AuthenticatedHomepage extends Page {
+public class UpgradesPage extends Page {
     /* Constructor */
-    public AuthenticatedHomepage() {
+    public UpgradesPage() {
         super();
-        setType(PageName.AUTHENTICATED);
+        setType(PageName.UPGRADES);
         setNextPages();
     }
 
     private void setNextPages() {
+        getNextPages().add(PageName.AUTHENTICATED);
         getNextPages().add(PageName.MOVIES);
-        getNextPages().add(PageName.UPGRADES);
         getNextPages().add(PageName.LOGOUT);
     }
 }
