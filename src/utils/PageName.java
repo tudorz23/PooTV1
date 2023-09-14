@@ -10,13 +10,18 @@ public enum PageName {
     UPGRADES("upgrades"),
     LOGOUT("logout");
 
-    private final String label;
+    public final String label;
 
     PageName(String label) {
         this.label = label;
     }
 
-    public String getLabel() {
-        return label;
+    public static PageName fromString(String text) {
+        for (PageName pageName : PageName.values()) {
+            if (pageName.label.equals(text)) {
+                return pageName;
+            }
+        }
+        return null;
     }
 }

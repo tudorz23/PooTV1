@@ -19,10 +19,7 @@ public class Main {
         ObjectNode output = objectMapper.createObjectNode();
 
         UserInteraction userInteraction = new UserInteraction(input, output);
-        userInteraction.prepareDatabase();
-        userInteraction.printDatabase();
-
-        userInteraction.destroyDatabase();
+        userInteraction.startUserInteraction();
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(args[1]), output);

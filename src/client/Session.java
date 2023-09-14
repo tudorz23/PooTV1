@@ -3,7 +3,10 @@ package client;
 import database.Database;
 import database.Movie;
 import database.pages.Page;
+import database.pages.PageFactory;
 import database.user.User;
+import utils.PageName;
+
 import java.util.ArrayList;
 
 public class Session {
@@ -11,13 +14,14 @@ public class Session {
     private User currUser;
     private Page currPage;
     private ArrayList<Movie> currMovieList;
+    private final PageFactory pageFactory;
 
     public Session() {
         // Proof that the Database Singleton implementation works.
-        this.database = Database.getInstance();
-        this.currUser = null;
-        // TODO factory page
-        // this.currPage = ;
+        database = Database.getInstance();
+        currUser = null;
+        pageFactory = new PageFactory();
+        currPage = pageFactory.createPage(PageName.UNAUTHENTICATED);
     }
 
     /* Getters and Setters */
