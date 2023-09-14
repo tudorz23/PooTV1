@@ -6,10 +6,14 @@ import java.util.ArrayList;
 
 public class Database {
     private static Database instance = null;
-    private ArrayList<User> users;
-    private ArrayList<Movie> movies;
+    private ArrayList<User> registeredUsers;
+    private ArrayList<Movie> availableMovies;
 
-    private Database() {}
+    /* Private Constructor for Singleton pattern */
+    private Database() {
+        registeredUsers = new ArrayList<>();
+        availableMovies = new ArrayList<>();
+    }
 
     /**
      * Applies the Singleton pattern to Database class.
@@ -23,16 +27,16 @@ public class Database {
     }
 
     /* Getters and Setters */
-    public ArrayList<User> getUsers() {
-        return users;
+    public ArrayList<User> getRegisteredUsers() {
+        return registeredUsers;
     }
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
+    public void setRegisteredUsers(ArrayList<User> registeredUsers) {
+        this.registeredUsers = registeredUsers;
     }
-    public ArrayList<Movie> getMovies() {
-        return movies;
+    public ArrayList<Movie> getAvailableMovies() {
+        return availableMovies;
     }
-    public void setMovies(ArrayList<Movie> movies) {
-        this.movies = movies;
+    public void setAvailableMovies(ArrayList<Movie> availableMovies) {
+        this.availableMovies = availableMovies;
     }
 }

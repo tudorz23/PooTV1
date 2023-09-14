@@ -1,5 +1,6 @@
 package database.user;
 
+import database.Movie;
 import fileInput.MovieInput;
 
 import java.util.ArrayList;
@@ -8,12 +9,21 @@ public class User {
     private Credentials credentials;
     private int tokensCount;
     private int numFreePremiumMovies;
-    private ArrayList<MovieInput> purchasedMovies;
-    private ArrayList<MovieInput> watchedMovies;
-    private ArrayList<MovieInput> likedMovies;
-    private ArrayList<MovieInput> ratedMovies;
+    private ArrayList<Movie> purchasedMovies;
+    private ArrayList<Movie> watchedMovies;
+    private ArrayList<Movie> likedMovies;
+    private ArrayList<Movie> ratedMovies;
 
-
+    /* Constructor */
+    public User(Credentials credentials) {
+        this.credentials = credentials;
+        tokensCount = 0;
+        numFreePremiumMovies = 0;
+        purchasedMovies = new ArrayList<>();
+        watchedMovies = new ArrayList<>();
+        likedMovies = new ArrayList<>();
+        ratedMovies = new ArrayList<>();
+    }
 
     /* Getters and Setters */
     public Credentials getCredentials() {
@@ -34,28 +44,28 @@ public class User {
     public void setNumFreePremiumMovies(int numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
-    public ArrayList<MovieInput> getPurchasedMovies() {
+    public ArrayList<Movie> getPurchasedMovies() {
         return purchasedMovies;
     }
-    public void setPurchasedMovies(ArrayList<MovieInput> purchasedMovies) {
+    public void setPurchasedMovies(ArrayList<Movie> purchasedMovies) {
         this.purchasedMovies = purchasedMovies;
     }
-    public ArrayList<MovieInput> getWatchedMovies() {
+    public ArrayList<Movie> getWatchedMovies() {
         return watchedMovies;
     }
-    public void setWatchedMovies(ArrayList<MovieInput> watchedMovies) {
+    public void setWatchedMovies(ArrayList<Movie> watchedMovies) {
         this.watchedMovies = watchedMovies;
     }
-    public ArrayList<MovieInput> getLikedMovies() {
+    public ArrayList<Movie> getLikedMovies() {
         return likedMovies;
     }
-    public void setLikedMovies(ArrayList<MovieInput> likedMovies) {
+    public void setLikedMovies(ArrayList<Movie> likedMovies) {
         this.likedMovies = likedMovies;
     }
-    public ArrayList<MovieInput> getRatedMovies() {
+    public ArrayList<Movie> getRatedMovies() {
         return ratedMovies;
     }
-    public void setRatedMovies(ArrayList<MovieInput> ratedMovies) {
+    public void setRatedMovies(ArrayList<Movie> ratedMovies) {
         this.ratedMovies = ratedMovies;
     }
 }
