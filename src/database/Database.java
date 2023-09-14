@@ -6,11 +6,14 @@ import java.util.ArrayList;
 
 public class Database {
     private static Database instance = null;
-    private ArrayList<User> registeredUsers = new ArrayList<>();
-    private ArrayList<Movie> availableMovies = new ArrayList<>();
+    private ArrayList<User> registeredUsers;
+    private ArrayList<Movie> availableMovies;
 
     /* Private Constructor for Singleton pattern */
-    private Database() {}
+    private Database() {
+        registeredUsers = new ArrayList<>();
+        availableMovies = new ArrayList<>();
+    }
 
     /**
      * Applies the Singleton pattern to Database class.

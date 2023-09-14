@@ -10,26 +10,12 @@ import database.user.User;
 import java.util.ArrayList;
 
 public class PrinterJson {
-    private final ObjectMapper mapper = new ObjectMapper();
-
-    /**
-     * Converts an ArrayList of users to an ArrayNode for JSON printing.
-     */
-    public ArrayNode getUserArrayNode(ArrayList<User> users) {
-        ArrayNode userArrayNode = mapper.createArrayNode();
-
-        for (User user : users) {
-            ObjectNode userNode = getUserNode(user);
-            userArrayNode.add(userNode);
-        }
-
-        return userArrayNode;
-    }
+    private static final ObjectMapper mapper = new ObjectMapper();
 
     /**
      * Converts a user object to an ObjectNode for JSON printing.
      */
-    public ObjectNode getUserNode(User user) {
+    public static ObjectNode getUserNode(User user) {
         ObjectNode userNode = mapper.createObjectNode();
 
         {
@@ -64,23 +50,23 @@ public class PrinterJson {
     }
 
     /**
-     * Converts an ArrayList of movies to an ArrayNode for JSON printing.
+     * Converts an ArrayList of users to an ArrayNode for JSON printing.
      */
-    public ArrayNode getMovieArrayNode(ArrayList<Movie> movies) {
-        ArrayNode movieArrayNode = mapper.createArrayNode();
+    public static ArrayNode getUserArrayNode(ArrayList<User> users) {
+        ArrayNode userArrayNode = mapper.createArrayNode();
 
-        for (Movie movie : movies) {
-            ObjectNode movieNode = getMovieNode(movie);
-            movieArrayNode.add(movieNode);
+        for (User user : users) {
+            ObjectNode userNode = getUserNode(user);
+            userArrayNode.add(userNode);
         }
 
-        return movieArrayNode;
+        return userArrayNode;
     }
 
     /**
      * Converts a movie object to an ObjectNode for JSON printing.
      */
-    public ObjectNode getMovieNode(Movie movie) {
+    public static ObjectNode getMovieNode(Movie movie) {
         ObjectNode movieNode = mapper.createObjectNode();
 
         movieNode.put("name", movie.getName());
@@ -113,5 +99,19 @@ public class PrinterJson {
         movieNode.put("numRatings", movie.getNumRatings());
 
         return movieNode;
+    }
+
+    /**
+     * Converts an ArrayList of movies to an ArrayNode for JSON printing.
+     */
+    public static ArrayNode getMovieArrayNode(ArrayList<Movie> movies) {
+        ArrayNode movieArrayNode = mapper.createArrayNode();
+
+        for (Movie movie : movies) {
+            ObjectNode movieNode = getMovieNode(movie);
+            movieArrayNode.add(movieNode);
+        }
+
+        return movieArrayNode;
     }
 }

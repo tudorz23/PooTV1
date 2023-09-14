@@ -18,13 +18,11 @@ public class UserInteraction {
     private final Input input;
     private ObjectNode output;
     private Database database;
-    private PrinterJson printerJson;
 
     /* Constructor */
     public UserInteraction(Input input, ObjectNode output) {
         this.input = input;
         this.output = output;
-        printerJson = new PrinterJson();
     }
 
     /**
@@ -44,17 +42,16 @@ public class UserInteraction {
 
         // Populate database with available movies.
         for (MovieInput movieInput : input.getMovies()) {
-            // Use Builder pattern
             Movie movie = new Movie(movieInput);
             database.getAvailableMovies().add(movie);
         }
     }
 
     public void printDatabase() {
-        ArrayNode registeredUsers = printerJson.getUserArrayNode(database.getRegisteredUsers());
+        ArrayNode registeredUsers = PrinterJson.getUserArrayNode(database.getRegisteredUsers());
         output.set("users", registeredUsers);
 
-        ArrayNode availableMovies = printerJson.getMovieArrayNode(database.getAvailableMovies());
+        ArrayNode availableMovies = PrinterJson.getMovieArrayNode(database.getAvailableMovies());
         output.set("movies", availableMovies);
     }
 
