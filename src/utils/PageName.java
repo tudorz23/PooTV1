@@ -12,7 +12,7 @@ public enum PageName {
 
     private final String label;
 
-    private PageName(String label) {
+    PageName(String label) {
         this.label = label;
     }
 

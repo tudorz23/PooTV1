@@ -6,7 +6,7 @@ import utils.PageName;
 import java.util.ArrayList;
 
 public class Page {
-    private ArrayList<PageName> nextPages;
+    private final ArrayList<PageName> nextPages;
     private PageName type;
 
     /* Constructor */
