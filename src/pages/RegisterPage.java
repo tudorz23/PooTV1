@@ -1,17 +1,17 @@
 package pages;
 
-import utils.PageName;
+import utils.PageType;
 
 public class RegisterPage extends Page {
     /* Constructor */
     public RegisterPage() {
         super();
-        setType(PageName.REGISTER);
+        setType(PageType.REGISTER);
         setNextPages();
     }
 
     private void setNextPages() {
-        getNextPages().add(PageName.UNAUTHENTICATED);
-        getNextPages().add(PageName.AUTHENTICATED);
+        getNextPages().add(PageType.UNAUTHENTICATED);
+        getNextPages().add(PageType.AUTHENTICATED);
     }
 }

@@ -16,7 +16,7 @@ public class Main {
         ObjectMapper objectMapper = new ObjectMapper();
         Input input = objectMapper.readValue(new File(args[0]), Input.class);
 
-        ObjectNode output = objectMapper.createObjectNode();
+        ArrayNode output = objectMapper.createArrayNode();
 
         UserInteraction userInteraction = new UserInteraction(input, output);
         userInteraction.startUserInteraction();

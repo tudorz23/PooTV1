@@ -1,28 +1,26 @@
 package pages;
 
-import utils.PageName;
+import utils.PageType;
 
 import java.util.ArrayList;
 
-public abstract class Page {
-    private final ArrayList<PageName> nextPages;
-    private PageName type;
+public class Page {
+    private final ArrayList<PageType> nextPages;
+    private PageType type;
 
     /* Constructor */
     public Page() {
         nextPages = new ArrayList<>();
     }
 
-    public abstract void changeToThis();
-
     /* Getters and Setters */
-    public ArrayList<PageName> getNextPages() {
+    public ArrayList<PageType> getNextPages() {
         return nextPages;
     }
-    public PageName getType() {
+    public PageType getType() {
         return type;
     }
-    public void setType(PageName type) {
+    public void setType(PageType type) {
         this.type = type;
     }
 }

@@ -1,7 +1,7 @@
 package pages;
 
 import database.Movie;
-import utils.PageName;
+import utils.PageType;
 
 public class SeeDetailsPage extends Page {
     private Movie movie;
@@ -9,15 +9,15 @@ public class SeeDetailsPage extends Page {
     /* Constructor */
     public SeeDetailsPage() {
         super();
-        setType(PageName.SEE_DETAILS);
+        setType(PageType.SEE_DETAILS);
         setNextPages();
     }
 
     private void setNextPages() {
-        getNextPages().add(PageName.AUTHENTICATED);
-        getNextPages().add(PageName.MOVIES);
-        getNextPages().add(PageName.UPGRADES);
-        getNextPages().add(PageName.LOGOUT);
+        getNextPages().add(PageType.AUTHENTICATED);
+        getNextPages().add(PageType.MOVIES);
+        getNextPages().add(PageType.UPGRADES);
+        getNextPages().add(PageType.UNAUTHENTICATED);
     }
 
     /* Getters and Setters */

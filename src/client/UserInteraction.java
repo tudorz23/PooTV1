@@ -1,6 +1,6 @@
 package client;
 
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.CommandFactory;
 import commands.ICommand;
 import database.Database;
@@ -20,12 +20,12 @@ public class UserInteraction {
     private CommandFactory commandFactory;
 
     private final Input input;
-    private ObjectNode output;
+    private ArrayNode output;
 
 
 
     /* Constructor */
-    public UserInteraction(Input input, ObjectNode output) {
+    public UserInteraction(Input input, ArrayNode output) {
         this.input = input;
         this.output = output;
         invoker = new Invoker();
@@ -34,7 +34,7 @@ public class UserInteraction {
     public void startUserInteraction() {
         prepareDatabase();
         initSession();
-        commandFactory = new CommandFactory(session);
+        commandFactory = new CommandFactory(session, output);
         parseActions();
         reset();
     }
@@ -82,13 +82,13 @@ public class UserInteraction {
      */
     public void parseActions() {
         for (ActionInput actionInput : input.getActions()) {
-            executeAction(actionInput);
+            executeAction(actionInput, output);
         }
     }
 
-    private void executeAction(ActionInput actionInput) {
+    private void executeAction(ActionInput actionInput, ArrayNode output) {
         // TODO
-        ICommand command = commandFactory.getCommand(actionInput);
+        ICommand command = commandFactory.getCommand(actionInput, output);
 
         // TODO
         invoker.execute(command);

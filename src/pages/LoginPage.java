@@ -1,17 +1,17 @@
 package pages;
 
-import utils.PageName;
+import utils.PageType;
 
 public class LoginPage extends Page {
     /* Constructor */
     public LoginPage() {
         super();
-        setType(PageName.LOGIN);
+        setType(PageType.LOGIN);
         setNextPages();
     }
 
     private void setNextPages() {
-        getNextPages().add(PageName.UNAUTHENTICATED);
-        getNextPages().add(PageName.AUTHENTICATED);
+        getNextPages().add(PageType.UNAUTHENTICATED);
+        getNextPages().add(PageType.AUTHENTICATED);
     }
 }

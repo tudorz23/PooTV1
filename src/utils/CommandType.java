@@ -1,8 +1,6 @@
 package utils;
 
-import commands.CommandFactory;
-
-public enum CommandName {
+public enum CommandType {
     CHANGE_PAGE("change page"),
     REGISTER("register"),
     LOGIN("login"),
@@ -18,14 +16,14 @@ public enum CommandName {
 
     public final String label;
 
-    CommandName(String label) {
+    CommandType(String label) {
         this.label = label;
     }
 
-    public static CommandName fromString(String text) {
-        for (CommandName commandName : CommandName.values()) {
-            if (commandName.label.equals(text)) {
-                return commandName;
+    public static CommandType fromString(String text) {
+        for (CommandType commandType : CommandType.values()) {
+            if (commandType.label.equals(text)) {
+                return commandType;
             }
         }
         return null;

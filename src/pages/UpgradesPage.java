@@ -1,18 +1,18 @@
 package pages;
 
-import utils.PageName;
+import utils.PageType;
 
 public class UpgradesPage extends Page {
     /* Constructor */
     public UpgradesPage() {
         super();
-        setType(PageName.UPGRADES);
+        setType(PageType.UPGRADES);
         setNextPages();
     }
 
     private void setNextPages() {
-        getNextPages().add(PageName.AUTHENTICATED);
-        getNextPages().add(PageName.MOVIES);
-        getNextPages().add(PageName.LOGOUT);
+        getNextPages().add(PageType.AUTHENTICATED);
+        getNextPages().add(PageType.MOVIES);
+        getNextPages().add(PageType.UNAUTHENTICATED);
     }
 }

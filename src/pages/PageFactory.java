@@ -1,11 +1,11 @@
 package pages;
 
-import utils.PageName;
+import utils.PageType;
 
 public class PageFactory {
-    public Page createPage(PageName type) {
+    public Page createPage(PageType type) {
         switch (type) {
-            case UNAUTHENTICATED, LOGOUT -> {
+            case UNAUTHENTICATED -> {
                 return new UnauthenticatedHomepage();
             }
             case LOGIN -> {

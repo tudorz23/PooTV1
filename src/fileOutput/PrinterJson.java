@@ -18,18 +18,16 @@ public class PrinterJson {
     public static ObjectNode getUserNode(User user) {
         ObjectNode userNode = mapper.createObjectNode();
 
-        {
-            ObjectNode credentialsNode = mapper.createObjectNode();
-            Credentials credentials = user.getCredentials();
+        ObjectNode credentialsNode = mapper.createObjectNode();
+        Credentials credentials = user.getCredentials();
 
-            credentialsNode.put("name", credentials.getName());
-            credentialsNode.put("password", credentials.getPassword());
-            credentialsNode.put("accountType", credentials.getAccountType());
-            credentialsNode.put("country", credentials.getCountry());
-            credentialsNode.put("balance", credentials.getBalance());
+        credentialsNode.put("name", credentials.getName());
+        credentialsNode.put("password", credentials.getPassword());
+        credentialsNode.put("accountType", credentials.getAccountType());
+        credentialsNode.put("country", credentials.getCountry());
+        credentialsNode.put("balance", String.valueOf(credentials.getIntBalance()));
 
-            userNode.set("credentials", credentialsNode);
-        }
+        userNode.set("credentials", credentialsNode);
 
         userNode.put("tokensCount", user.getTokensCount());
         userNode.put("numFreePremiumMovies", user.getNumFreePremiumMovies());

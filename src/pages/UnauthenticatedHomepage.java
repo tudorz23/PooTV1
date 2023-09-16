@@ -1,25 +1,17 @@
 package pages;
 
-import client.Session;
-import utils.PageName;
+import utils.PageType;
 
 public class UnauthenticatedHomepage extends Page {
-    private Session session;
-
     /* Constructor */
     public UnauthenticatedHomepage() {
         super();
-        setType(PageName.UNAUTHENTICATED);
+        setType(PageType.UNAUTHENTICATED);
         setNextPages();
     }
 
-    @Override
-    public void changeToThis() {
-
-    }
-
     private void setNextPages() {
-        getNextPages().add(PageName.LOGIN);
-        getNextPages().add(PageName.REGISTER);
+        getNextPages().add(PageType.LOGIN);
+        getNextPages().add(PageType.REGISTER);
     }
 }

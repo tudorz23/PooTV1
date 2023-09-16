@@ -1,7 +1,7 @@
 package pages;
 
 import database.Movie;
-import utils.PageName;
+import utils.PageType;
 
 import java.util.ArrayList;
 
@@ -12,14 +12,14 @@ public class MoviesPage extends Page{
     public MoviesPage() {
         super();
         movies = new ArrayList<>();
-        setType(PageName.MOVIES);
+        setType(PageType.MOVIES);
         setNextPages();
     }
 
     private void setNextPages() {
-        getNextPages().add(PageName.AUTHENTICATED);
-        getNextPages().add(PageName.SEE_DETAILS);
-        getNextPages().add(PageName.LOGOUT);
+        getNextPages().add(PageType.AUTHENTICATED);
+        getNextPages().add(PageType.SEE_DETAILS);
+        getNextPages().add(PageType.UNAUTHENTICATED);
     }
 
     /* Getters and Setters */
