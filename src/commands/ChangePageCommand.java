@@ -18,11 +18,20 @@ public class ChangePageCommand implements ICommand {
         this.output = output;
     }
 
+    /**
+     * Executes the changePage() method of IChangePageStrategy.
+     */
+    @Override
     public void execute() {
         IChangePageStrategy changePageStrategy = getChangeStrategy();
         changePageStrategy.changePage();
     }
 
+    /**
+     * Factory method to get the appropriate change page strategy.
+     * @return strategy of type IChangePageStrategy.
+     * @throws IllegalArgumentException if the changePage argument is invalid.
+     */
     private IChangePageStrategy getChangeStrategy() {
         String stringPageName = actionInput.getPage();
 

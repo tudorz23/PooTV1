@@ -1,31 +1,47 @@
 package commands.changePageStrategy;
 
 import client.Session;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.User;
+import fileOutput.PrinterJson;
 import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
 public class ChangeToAuthenticatedStrategy implements IChangePageStrategy {
     private Session session;
-    private User user;
+    private ArrayNode output;
     private Page newPage;
 
     /* Constructor */
-    public ChangeToAuthenticatedStrategy(Session session, User user) {
+    public ChangeToAuthenticatedStrategy(Session session, ArrayNode output) {
         this.session = session;
-        this.user = user;
+        this.output = output;
     }
 
-    /**
-     * Will only be called from the Login Command, when it is already certain
-     * it can be done.
-     */
     @Override
     public void changePage() {
-        session.setCurrUser(user);
+        if (!testValidity()) {
+            return;
+        }
+
         PageFactory pageFactory = new PageFactory();
         newPage = pageFactory.createPage(PageType.AUTHENTICATED);
         session.setCurrPage(newPage);
+
+        session.getCurrMovieList().clear();
+    }
+
+    /**
+     * Checks if the changePage command is valid.
+     * @return true if it is valid, false otherwise.
+     */
+    private boolean testValidity() {
+        if (!session.getCurrPage().getNextPages().contains(PageType.AUTHENTICATED)) {
+            PrinterJson errorPrinter = new PrinterJson();
+            errorPrinter.printError(output);
+            return false;
+        }
+        return true;
     }
 }

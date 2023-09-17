@@ -4,6 +4,7 @@ import database.Movie;
 import utils.PageType;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MoviesPage extends Page{
     private ArrayList<Movie> movies;
@@ -13,13 +14,9 @@ public class MoviesPage extends Page{
         super();
         movies = new ArrayList<>();
         setType(PageType.MOVIES);
-        setNextPages();
-    }
 
-    private void setNextPages() {
-        getNextPages().add(PageType.AUTHENTICATED);
-        getNextPages().add(PageType.SEE_DETAILS);
-        getNextPages().add(PageType.UNAUTHENTICATED);
+        getNextPages().addAll(Arrays.asList(PageType.AUTHENTICATED, PageType.SEE_DETAILS,
+                                                PageType.UNAUTHENTICATED));
     }
 
     /* Getters and Setters */

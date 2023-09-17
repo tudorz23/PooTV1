@@ -3,6 +3,7 @@ package commands;
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileInput.ActionInput;
+import utils.CommandType;
 
 public class CommandFactory {
     private Session session;
@@ -14,15 +15,31 @@ public class CommandFactory {
         this.output = output;
     }
 
-    public ICommand getCommand(ActionInput actionInput, ArrayNode output) {
+    public ICommand getCommand(ActionInput actionInput) {
+        // If it is a "change page" command.
         if (actionInput.getType().equals("change page")) {
             return new ChangePageCommand(session, actionInput, output);
         }
 
         // Now, it surely is an "on page" command.
-        // TODO
-        // switch for "feature"
+        CommandType commandType = CommandType.fromString(actionInput.getFeature());
 
-        return null;
+        if (commandType == null) {
+            throw new IllegalArgumentException("Command " + actionInput.getFeature()
+                        + " is not supported.");
+        }
+
+        switch (commandType) {
+            case LOGIN -> {
+                return new LoginCommand(session, actionInput, output);
+            }
+            case REGISTER -> {
+                return new RegisterCommand(session, actionInput, output);
+            }
+            case LOGOUT -> {
+                return new LogoutCommand(session, output);
+            }
+            default -> throw new IllegalArgumentException("Command not yet implemented.");
+        }
     }
 }

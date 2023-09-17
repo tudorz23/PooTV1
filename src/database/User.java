@@ -15,7 +15,7 @@ public class User {
     public User(Credentials credentials) {
         this.credentials = credentials;
         tokensCount = 0;
-        numFreePremiumMovies = 0;
+        numFreePremiumMovies = 15;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();

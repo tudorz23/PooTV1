@@ -82,13 +82,13 @@ public class UserInteraction {
      */
     public void parseActions() {
         for (ActionInput actionInput : input.getActions()) {
-            executeAction(actionInput, output);
+            executeAction(actionInput);
         }
     }
 
-    private void executeAction(ActionInput actionInput, ArrayNode output) {
+    private void executeAction(ActionInput actionInput) {
         // TODO
-        ICommand command = commandFactory.getCommand(actionInput, output);
+        ICommand command = commandFactory.getCommand(actionInput);
 
         // TODO
         invoker.execute(command);

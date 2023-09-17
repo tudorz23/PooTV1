@@ -3,6 +3,8 @@ package pages;
 import database.Movie;
 import utils.PageType;
 
+import java.util.Arrays;
+
 public class SeeDetailsPage extends Page {
     private Movie movie;
 
@@ -10,14 +12,9 @@ public class SeeDetailsPage extends Page {
     public SeeDetailsPage() {
         super();
         setType(PageType.SEE_DETAILS);
-        setNextPages();
-    }
 
-    private void setNextPages() {
-        getNextPages().add(PageType.AUTHENTICATED);
-        getNextPages().add(PageType.MOVIES);
-        getNextPages().add(PageType.UPGRADES);
-        getNextPages().add(PageType.UNAUTHENTICATED);
+        getNextPages().addAll(Arrays.asList(PageType.AUTHENTICATED, PageType.MOVIES,
+                                PageType.UPGRADES, PageType.UNAUTHENTICATED));
     }
 
     /* Getters and Setters */

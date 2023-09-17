@@ -39,8 +39,7 @@ public class PrinterJson {
         ArrayNode currentMoviesList = mapper.createArrayNode();
         errorMessage.set("currentMoviesList", currentMoviesList);
 
-        ObjectNode currentUser = mapper.createObjectNode();
-        errorMessage.set("currentUser", currentUser);
+        errorMessage.set("currentUser", null);
 
         output.add(errorMessage);
     }

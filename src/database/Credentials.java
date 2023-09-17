@@ -16,8 +16,7 @@ public class Credentials extends CredentialsInput {
         this.setCountry(credentialsInput.getCountry());
         this.setBalance(credentialsInput.getBalance());
 
-        int balanceToInt = Integer.parseInt(this.getBalance());
-        this.setIntBalance(balanceToInt);
+        this.intBalance = Integer.parseInt(this.getBalance());
     }
 
     /* Getters and Setters */

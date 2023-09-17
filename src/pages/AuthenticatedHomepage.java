@@ -2,17 +2,15 @@ package pages;
 
 import utils.PageType;
 
+import java.util.Arrays;
+
 public class AuthenticatedHomepage extends Page {
     /* Constructor */
     public AuthenticatedHomepage() {
         super();
         setType(PageType.AUTHENTICATED);
-        setNextPages();
-    }
 
-    private void setNextPages() {
-        getNextPages().add(PageType.MOVIES);
-        getNextPages().add(PageType.UPGRADES);
-        getNextPages().add(PageType.UNAUTHENTICATED);
+        getNextPages().addAll(Arrays.asList(PageType.MOVIES, PageType.UPGRADES,
+                PageType.UNAUTHENTICATED));
     }
 }
