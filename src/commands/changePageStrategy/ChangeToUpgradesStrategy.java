@@ -2,13 +2,15 @@ package commands.changePageStrategy;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import fileOutput.ErrorPrinter;
+import fileOutput.PrinterJson;
+import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
 public class ChangeToUpgradesStrategy implements IChangePageStrategy {
     private Session session;
     private ArrayNode output;
+    private Page newPage;
 
     /* Constructor */
     public ChangeToUpgradesStrategy(Session session, ArrayNode output) {
@@ -24,7 +26,8 @@ public class ChangeToUpgradesStrategy implements IChangePageStrategy {
         }
 
         PageFactory pageFactory = new PageFactory();
-        session.setCurrPage(pageFactory.createPage(PageType.UPGRADES));
+        newPage = pageFactory.createPage(PageType.UPGRADES);
+        session.setCurrPage(newPage);
     }
 
     /**
@@ -33,7 +36,7 @@ public class ChangeToUpgradesStrategy implements IChangePageStrategy {
      */
     private boolean testValidity() {
         if (!session.getCurrPage().getNextPages().contains(PageType.UPGRADES)) {
-            ErrorPrinter errorPrinter = new ErrorPrinter();
+            PrinterJson errorPrinter = new PrinterJson();
             errorPrinter.printError(output);
             return false;
         }

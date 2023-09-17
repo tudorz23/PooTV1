@@ -2,13 +2,15 @@ package commands.changePageStrategy;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import fileOutput.ErrorPrinter;
+import fileOutput.PrinterJson;
+import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
 public class ChangeToUnauthenticatedStrategy implements IChangePageStrategy{
     private Session session;
     private ArrayNode output;
+    private Page newPage;
 
     /* Constructor */
     public ChangeToUnauthenticatedStrategy(Session session, ArrayNode output) {
@@ -25,7 +27,8 @@ public class ChangeToUnauthenticatedStrategy implements IChangePageStrategy{
         session.setCurrUser(null);
         session.getCurrMovieList().clear();
         PageFactory pageFactory = new PageFactory();
-        session.setCurrPage(pageFactory.createPage(PageType.UNAUTHENTICATED));
+        newPage = pageFactory.createPage(PageType.UNAUTHENTICATED);
+        session.setCurrPage(newPage);
     }
 
     /**
@@ -34,7 +37,7 @@ public class ChangeToUnauthenticatedStrategy implements IChangePageStrategy{
      */
     private boolean testValidity() {
         if (!session.getCurrPage().getNextPages().contains(PageType.UNAUTHENTICATED)) {
-            ErrorPrinter errorPrinter = new ErrorPrinter();
+            PrinterJson errorPrinter = new PrinterJson();
             errorPrinter.printError(output);
             return false;
         }

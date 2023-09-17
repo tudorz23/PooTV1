@@ -13,6 +13,39 @@ public class PrinterJson {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     /**
+     * Used when changing to Movies or See Details page.
+     * @param currentMoviesList list of movies visible to the user.
+     * @param user current logged-in user.
+     * @param output ArrayNode for JSON printing.
+     */
+    public void printSuccess(ArrayList<Movie> currentMoviesList, User user, ArrayNode output) {
+        ObjectNode message = mapper.createObjectNode();
+
+        message.put("error", (String) null);
+
+        ArrayNode currentMoviesNode = PrinterJson.getMovieArrayNode(currentMoviesList);
+        message.set("currentMoviesList", currentMoviesNode);
+
+        ObjectNode currentUser = PrinterJson.getUserNode(user);
+        message.set("currentUser", currentUser);
+
+        output.add(message);
+    }
+
+    public void printError(ArrayNode output) {
+        ObjectNode errorMessage = mapper.createObjectNode();
+        errorMessage.put("error", "Error");
+
+        ArrayNode currentMoviesList = mapper.createArrayNode();
+        errorMessage.set("currentMoviesList", currentMoviesList);
+
+        ObjectNode currentUser = mapper.createObjectNode();
+        errorMessage.set("currentUser", currentUser);
+
+        output.add(errorMessage);
+    }
+
+    /**
      * Converts a user object to an ObjectNode for JSON printing.
      */
     public static ObjectNode getUserNode(User user) {

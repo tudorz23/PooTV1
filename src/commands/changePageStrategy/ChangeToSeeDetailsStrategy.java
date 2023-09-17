@@ -3,8 +3,8 @@ package commands.changePageStrategy;
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.Movie;
-import fileOutput.ErrorPrinter;
-import fileOutput.SuccessPrinter;
+import fileOutput.PrinterJson;
+import pages.Page;
 import pages.PageFactory;
 import pages.SeeDetailsPage;
 import utils.PageType;
@@ -13,6 +13,7 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
     private Session session;
     private ArrayNode output;
     private String movieName;
+    private Page newPage;
 
 
     /* Constructor */
@@ -29,11 +30,12 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
         }
 
         PageFactory pageFactory = new PageFactory();
-        session.setCurrPage(pageFactory.createPage(PageType.SEE_DETAILS));
+        newPage = pageFactory.createPage(PageType.SEE_DETAILS);
+        session.setCurrPage(newPage);
         copyMovie();
 
-        SuccessPrinter successPrinter = new SuccessPrinter();
-        successPrinter.printMovies(session.getCurrMovieList(),
+        PrinterJson successPrinter = new PrinterJson();
+        successPrinter.printSuccess(session.getCurrMovieList(),
                                     session.getCurrUser(), output);
     }
 
@@ -43,7 +45,7 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
      */
     private boolean testValidity() {
         if (session.getCurrPage().getType() != PageType.MOVIES) {
-            ErrorPrinter errorPrinter = new ErrorPrinter();
+            PrinterJson errorPrinter = new PrinterJson();
             errorPrinter.printError(output);
             return false;
         }
@@ -52,17 +54,17 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
 
     /**
      * Selects the movie with the respective title from the displayed movie list
-     * and sets it as current page's movie and session's current movie.
+     * and sets it as new page's movie and session's current movie.
      */
     private void copyMovie() {
         for (Movie movie : session.getCurrMovieList()) {
             if (movie.getName().equals(movieName)) {
-                ((SeeDetailsPage) session.getCurrPage()).setMovie(movie);
+                ((SeeDetailsPage) newPage).setMovie(movie);
                 break;
             }
         }
 
         session.getCurrMovieList().clear();
-        session.getCurrMovieList().add(((SeeDetailsPage) session.getCurrPage()).getMovie());
+        session.getCurrMovieList().add(((SeeDetailsPage) newPage).getMovie());
     }
 }

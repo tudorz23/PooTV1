@@ -2,12 +2,14 @@ package commands.changePageStrategy;
 
 import client.Session;
 import database.User;
+import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
 public class ChangeToAuthenticatedStrategy implements IChangePageStrategy {
     private Session session;
     private User user;
+    private Page newPage;
 
     /* Constructor */
     public ChangeToAuthenticatedStrategy(Session session, User user) {
@@ -23,6 +25,7 @@ public class ChangeToAuthenticatedStrategy implements IChangePageStrategy {
     public void changePage() {
         session.setCurrUser(user);
         PageFactory pageFactory = new PageFactory();
-        session.setCurrPage(pageFactory.createPage(PageType.AUTHENTICATED));
+        newPage = pageFactory.createPage(PageType.AUTHENTICATED);
+        session.setCurrPage(newPage);
     }
 }

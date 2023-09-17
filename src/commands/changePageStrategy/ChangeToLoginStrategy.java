@@ -2,13 +2,15 @@ package commands.changePageStrategy;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import fileOutput.ErrorPrinter;
+import fileOutput.PrinterJson;
+import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
 public class ChangeToLoginStrategy implements IChangePageStrategy {
     private Session session;
     private ArrayNode output;
+    private Page newPage;
 
     /* Constructor */
     public ChangeToLoginStrategy(Session session, ArrayNode output) {
@@ -24,7 +26,8 @@ public class ChangeToLoginStrategy implements IChangePageStrategy {
 
         session.setCurrUser(null);
         PageFactory pageFactory = new PageFactory();
-        session.setCurrPage(pageFactory.createPage(PageType.LOGIN));
+        newPage = pageFactory.createPage(PageType.LOGIN);
+        session.setCurrPage(newPage);
     }
 
     /**
@@ -33,7 +36,7 @@ public class ChangeToLoginStrategy implements IChangePageStrategy {
      */
     private boolean testValidity() {
         if (!session.getCurrPage().getNextPages().contains(PageType.LOGIN)) {
-            ErrorPrinter errorPrinter = new ErrorPrinter();
+            PrinterJson errorPrinter = new PrinterJson();
             errorPrinter.printError(output);
             return false;
         }
