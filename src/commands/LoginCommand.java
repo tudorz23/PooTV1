@@ -59,7 +59,7 @@ public class LoginCommand implements ICommand {
         String nameInput = credentialsInput.getName();
         String passwordInput = credentialsInput.getPassword();
 
-        for (User user : Database.getInstance().getRegisteredUsers()) {
+        for (User user : session.getDatabase().getRegisteredUsers()) {
             if (nameInput.equals(user.getCredentials().getName())
                 && passwordInput.equals(user.getCredentials().getPassword())) {
                 validateLogin(user);

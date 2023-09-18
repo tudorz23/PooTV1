@@ -58,7 +58,7 @@ public class ChangeToMoviesStrategy implements IChangePageStrategy {
     private void copyMovies() {
         User user = session.getCurrUser();
 
-        for (Movie movie : Database.getInstance().getAvailableMovies()) {
+        for (Movie movie : session.getDatabase().getAvailableMovies()) {
             if (!movie.getCountriesBanned().contains(user.getCredentials().getCountry())) {
                 // Add to current page's Movie list.
                 ((MoviesPage) newPage).getMovies().add(movie);
@@ -66,7 +66,7 @@ public class ChangeToMoviesStrategy implements IChangePageStrategy {
         }
 
         // Copy the movie list to the session's movie list.
-        session.getCurrMovieList().clear();
+        session.resetCurrMovieList();
         for (Movie movie : ((MoviesPage) newPage).getMovies()) {
             session.getCurrMovieList().add(movie);
         }

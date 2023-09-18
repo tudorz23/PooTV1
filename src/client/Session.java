@@ -1,5 +1,6 @@
 package client;
 
+import database.Database;
 import database.Movie;
 import pages.Page;
 import pages.PageFactory;
@@ -12,18 +13,23 @@ public class Session {
     private User currUser;
     private Page currPage;
     private ArrayList<Movie> currMovieList;
+    private Database database;
 
-    public Session() {
+    public Session(Database database) {
         currUser = null;
         currMovieList = new ArrayList<>();
         PageFactory pageFactory = new PageFactory();
         currPage = pageFactory.createPage(PageType.UNAUTHENTICATED);
+        this.database = database;
     }
 
-    public void reset() {
-        currUser = null;
-        currPage = null;
-        currMovieList.clear();
+    /**
+     * Clears the currently displayed movie list.
+     * clear() is not used because it is necessary that the list is sometimes empty
+     * (and not populated with null elements, as clear() would do).
+     */
+    public void resetCurrMovieList() {
+        currMovieList = new ArrayList<>();
     }
 
     /* Getters and Setters */
@@ -41,5 +47,12 @@ public class Session {
     }
     public ArrayList<Movie> getCurrMovieList() {
         return currMovieList;
+    }
+    public void setCurrMovieList(ArrayList<Movie> currMovieList) {
+        this.currMovieList = currMovieList;
+    }
+
+    public Database getDatabase() {
+        return database;
     }
 }

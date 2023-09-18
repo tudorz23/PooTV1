@@ -48,7 +48,7 @@ public class UserInteraction {
      */
     public void prepareDatabase() {
         // First call of Database.getInstance().
-        this.database = Database.getInstance();
+        this.database = new Database();
 
         // Populate database with registered users.
         for (UserInput userInput : input.getUsers()) {
@@ -77,9 +77,7 @@ public class UserInteraction {
      * Clears the database and the command list for the next tests.
      */
     public void reset() {
-        database.reset();
         invoker.reset();
-        session.reset();
     }
 
     /**
@@ -101,6 +99,6 @@ public class UserInteraction {
      * Initializes a new Session.
      */
     public void initSession() {
-        session = new Session();
+        session = new Session(database);
     }
 }

@@ -48,7 +48,7 @@ public class RegisterCommand implements ICommand {
         // Add the new user in the database.
         Credentials newCredentials = new Credentials(actionInput.getCredentials());
         User newUser = new User(newCredentials);
-        Database.getInstance().getRegisteredUsers().add(newUser);
+        session.getDatabase().getRegisteredUsers().add(newUser);
 
         // Set the new user in the session and move to Authenticated Homepage.
         session.setCurrUser(newUser);
@@ -64,7 +64,7 @@ public class RegisterCommand implements ICommand {
         CredentialsInput credentialsInput = actionInput.getCredentials();
         String nameInput = credentialsInput.getName();
 
-        for (User user : Database.getInstance().getRegisteredUsers()) {
+        for (User user : session.getDatabase().getRegisteredUsers()) {
             if (nameInput.equals(user.getCredentials().getName())) {
                 return false;
             }

@@ -2,6 +2,7 @@ package commands;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import database.Database;
 import fileInput.ActionInput;
 import utils.CommandType;
 
@@ -41,6 +42,9 @@ public class CommandFactory {
             }
             case SEARCH -> {
                 return new SearchCommand(session, actionInput, output);
+            }
+            case FILTER -> {
+                return new FilterCommand(session, actionInput, output);
             }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }

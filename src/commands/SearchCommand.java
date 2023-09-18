@@ -30,7 +30,7 @@ public class SearchCommand implements ICommand {
         }
 
         // Clear the currently displayed movie list.
-        session.getCurrMovieList().clear();
+        session.resetCurrMovieList();
 
         // Search on the Page's movie list for films that start with that prefix.
         String prefix = actionInput.getStartsWith();

@@ -10,7 +10,9 @@ import pages.PageFactory;
 import pages.SeeDetailsPage;
 import utils.PageType;
 
-public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
+import java.util.ArrayList;
+
+public class ChangeToSeeDetailsStrategy implements IChangePageStrategy {
     private Session session;
     private ArrayNode output;
     private String movieName;
@@ -25,17 +27,23 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
 
     @Override
     public void changePage() {
+        PrinterJson printerJson = new PrinterJson();
+
         if (!testValidity()) {
+            printerJson.printError(output);
             return;
         }
 
         PageFactory pageFactory = new PageFactory();
         newPage = pageFactory.createPage(PageType.SEE_DETAILS);
-        copyMovie();
-        session.setCurrPage(newPage);
 
-        PrinterJson successPrinter = new PrinterJson();
-        successPrinter.printSuccess(session.getCurrMovieList(),
+        if (!copyMovie()) {
+            printerJson.printError(output);
+            return;
+        }
+
+        session.setCurrPage(newPage);
+        printerJson.printSuccess(session.getCurrMovieList(),
                                     session.getCurrUser(), output);
     }
 
@@ -46,18 +54,17 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
     private boolean testValidity() {
         // SeeDetailsPage can only be accessed from MoviesPage.
         if (session.getCurrPage().getType() != PageType.MOVIES) {
-            PrinterJson errorPrinter = new PrinterJson();
-            errorPrinter.printError(output);
             return false;
         }
         return true;
     }
 
     /**
-     * Selects the movie with the respective title from the movies (which is also current)
-     * page list and sets it as new page's movie and session's current movie.
+     * Selects the movie with the respective title from the movies page's list (which is also
+     * current page) and sets it as new page's movie and session's current movie.
+     * @return true if the movie is found, false otherwise.
      */
-    private void copyMovie() {
+    private boolean copyMovie() {
         for (Movie movie : ((MoviesPage) session.getCurrPage()).getMovies()) {
             if (movie.getName().equals(movieName)) {
                 ((SeeDetailsPage) newPage).setMovie(movie);
@@ -65,7 +72,14 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
             }
         }
 
-        session.getCurrMovieList().clear();
+        // Check if the movie is found.
+        if (((SeeDetailsPage) newPage).getMovie() == null) {
+            return false;
+        }
+
+        session.resetCurrMovieList();
         session.getCurrMovieList().add(((SeeDetailsPage) newPage).getMovie());
+
+        return true;
     }
 }
