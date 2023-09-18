@@ -1,6 +1,5 @@
 package client;
 
-import database.Database;
 import database.Movie;
 import pages.Page;
 import pages.PageFactory;
@@ -10,18 +9,21 @@ import utils.PageType;
 import java.util.ArrayList;
 
 public class Session {
-    private Database database;
     private User currUser;
     private Page currPage;
     private ArrayList<Movie> currMovieList;
 
     public Session() {
-        // Proof that the Database Singleton implementation works.
-        database = Database.getInstance();
         currUser = null;
         currMovieList = new ArrayList<>();
         PageFactory pageFactory = new PageFactory();
         currPage = pageFactory.createPage(PageType.UNAUTHENTICATED);
+    }
+
+    public void reset() {
+        currUser = null;
+        currPage = null;
+        currMovieList.clear();
     }
 
     /* Getters and Setters */

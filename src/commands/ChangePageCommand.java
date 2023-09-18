@@ -62,9 +62,11 @@ public class ChangePageCommand implements ICommand {
             case UPGRADES -> {
                 return new ChangeToUpgradesStrategy(session, output);
             }
+            case AUTHENTICATED -> {
+                return new ChangeToAuthenticatedStrategy(session, output);
+            }
             default -> {
-                // Cannot explicitly move to Authenticated Homepage.
-                throw new IllegalArgumentException("Cannot directly access Authenticated Homepage.");
+                throw new IllegalArgumentException("Page " + stringPageName + " is not supported.");
             }
         }
     }

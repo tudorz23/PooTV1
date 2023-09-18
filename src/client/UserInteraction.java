@@ -1,6 +1,7 @@
 package client;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import commands.CommandFactory;
 import commands.ICommand;
 import database.Database;
@@ -11,6 +12,7 @@ import fileInput.ActionInput;
 import fileInput.Input;
 import fileInput.MovieInput;
 import fileInput.UserInput;
+import fileOutput.PrinterJson;
 
 public class UserInteraction {
     private Session session;
@@ -21,13 +23,13 @@ public class UserInteraction {
 
     private final Input input;
     private ArrayNode output;
-
-
+    private ObjectNode dummyOutput;
 
     /* Constructor */
-    public UserInteraction(Input input, ArrayNode output) {
+    public UserInteraction(Input input, ArrayNode output, ObjectNode dummyOutput) {
         this.input = input;
         this.output = output;
+        this.dummyOutput = dummyOutput;
         invoker = new Invoker();
     }
 
@@ -36,6 +38,7 @@ public class UserInteraction {
         initSession();
         commandFactory = new CommandFactory(session, output);
         parseActions();
+        // printDatabase();
         reset();
     }
 
@@ -61,13 +64,14 @@ public class UserInteraction {
         }
     }
 
-//    public void printDatabase() {
-//        ArrayNode registeredUsers = PrinterJson.getUserArrayNode(database.getRegisteredUsers());
-//        output.set("users", registeredUsers);
-//
-//        ArrayNode availableMovies = PrinterJson.getMovieArrayNode(database.getAvailableMovies());
-//        output.set("movies", availableMovies);
-//    }
+    public void printDatabase() {
+        PrinterJson printerJson = new PrinterJson();
+        ArrayNode registeredUsers = printerJson.getUserArrayNode(database.getRegisteredUsers());
+        dummyOutput.set("users", registeredUsers);
+
+        ArrayNode availableMovies = printerJson.getMovieArrayNode(database.getAvailableMovies());
+        dummyOutput.set("movies", availableMovies);
+    }
 
     /**
      * Clears the database and the command list for the next tests.
@@ -75,6 +79,7 @@ public class UserInteraction {
     public void reset() {
         database.reset();
         invoker.reset();
+        session.reset();
     }
 
     /**
@@ -87,10 +92,8 @@ public class UserInteraction {
     }
 
     private void executeAction(ActionInput actionInput) {
-        // TODO
         ICommand command = commandFactory.getCommand(actionInput);
 
-        // TODO
         invoker.execute(command);
     }
 

@@ -4,6 +4,7 @@ import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.Movie;
 import fileOutput.PrinterJson;
+import pages.MoviesPage;
 import pages.Page;
 import pages.PageFactory;
 import pages.SeeDetailsPage;
@@ -14,7 +15,6 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
     private ArrayNode output;
     private String movieName;
     private Page newPage;
-
 
     /* Constructor */
     public ChangeToSeeDetailsStrategy(Session session, ArrayNode output, String movieName) {
@@ -31,8 +31,8 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
 
         PageFactory pageFactory = new PageFactory();
         newPage = pageFactory.createPage(PageType.SEE_DETAILS);
-        session.setCurrPage(newPage);
         copyMovie();
+        session.setCurrPage(newPage);
 
         PrinterJson successPrinter = new PrinterJson();
         successPrinter.printSuccess(session.getCurrMovieList(),
@@ -44,6 +44,7 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
      * @return true if it is valid, false otherwise.
      */
     private boolean testValidity() {
+        // SeeDetailsPage can only be accessed from MoviesPage.
         if (session.getCurrPage().getType() != PageType.MOVIES) {
             PrinterJson errorPrinter = new PrinterJson();
             errorPrinter.printError(output);
@@ -53,11 +54,11 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy{
     }
 
     /**
-     * Selects the movie with the respective title from the displayed movie list
-     * and sets it as new page's movie and session's current movie.
+     * Selects the movie with the respective title from the movies (which is also current)
+     * page list and sets it as new page's movie and session's current movie.
      */
     private void copyMovie() {
-        for (Movie movie : session.getCurrMovieList()) {
+        for (Movie movie : ((MoviesPage) session.getCurrPage()).getMovies()) {
             if (movie.getName().equals(movieName)) {
                 ((SeeDetailsPage) newPage).setMovie(movie);
                 break;

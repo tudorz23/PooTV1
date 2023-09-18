@@ -2,7 +2,6 @@ package commands.changePageStrategy;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import database.User;
 import fileOutput.PrinterJson;
 import pages.Page;
 import pages.PageFactory;
@@ -11,7 +10,6 @@ import utils.PageType;
 public class ChangeToAuthenticatedStrategy implements IChangePageStrategy {
     private Session session;
     private ArrayNode output;
-    private Page newPage;
 
     /* Constructor */
     public ChangeToAuthenticatedStrategy(Session session, ArrayNode output) {
@@ -26,7 +24,7 @@ public class ChangeToAuthenticatedStrategy implements IChangePageStrategy {
         }
 
         PageFactory pageFactory = new PageFactory();
-        newPage = pageFactory.createPage(PageType.AUTHENTICATED);
+        Page newPage = pageFactory.createPage(PageType.AUTHENTICATED);
         session.setCurrPage(newPage);
 
         session.getCurrMovieList().clear();

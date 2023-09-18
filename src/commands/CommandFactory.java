@@ -39,6 +39,9 @@ public class CommandFactory {
             case LOGOUT -> {
                 return new LogoutCommand(session, output);
             }
+            case SEARCH -> {
+                return new SearchCommand(session, actionInput, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }

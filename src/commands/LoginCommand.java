@@ -31,25 +31,21 @@ public class LoginCommand implements ICommand {
         // Check if we are on login page.
         if (session.getCurrPage().getType() != PageType.LOGIN) {
             printerJson.printError(output);
+
+            if (session.getCurrPage().getType() == PageType.REGISTER) {
+                moveToUnauthenticatedHomepage();
+            }
             return;
         }
 
         if (!testValidity()) {
             printerJson.printError(output);
-
-            // Move to Unauthenticated Homepage.
-            ChangeToUnauthenticatedStrategy failedLoginStrategy
-                    = new ChangeToUnauthenticatedStrategy(session, output);
-            failedLoginStrategy.changePage();
-
+            moveToUnauthenticatedHomepage();
             return;
         }
 
         // Change to Authenticated Homepage.
-        ChangeToAuthenticatedStrategy succeededLoginStrategy
-                = new ChangeToAuthenticatedStrategy(session, output);
-        succeededLoginStrategy.changePage();
-
+        moveToAuthenticatedHomepage();
         printerJson.printSuccess(session.getCurrMovieList(), session.getCurrUser(), output);
     }
 
@@ -75,5 +71,23 @@ public class LoginCommand implements ICommand {
 
     private void validateLogin(User user) {
         session.setCurrUser(user);
+    }
+
+    /**
+     * Shortcut to move to Unauthenticated Homepage.
+     */
+    private void moveToUnauthenticatedHomepage() {
+        ChangeToUnauthenticatedStrategy failedLoginStrategy
+                    = new ChangeToUnauthenticatedStrategy(session, output);
+        failedLoginStrategy.changePage();
+    }
+
+    /**
+     * Shortcut to move to Authenticated Homepage.
+     */
+    private void moveToAuthenticatedHomepage() {
+        ChangeToAuthenticatedStrategy succeededLoginStrategy
+                = new ChangeToAuthenticatedStrategy(session, output);
+        succeededLoginStrategy.changePage();
     }
 }

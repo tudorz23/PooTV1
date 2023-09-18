@@ -28,19 +28,20 @@ public class RegisterCommand implements ICommand {
     @Override
     public void execute() {
         PrinterJson printerJson = new PrinterJson();
+
+        // Check if we are on register page.
         if (session.getCurrPage().getType() != PageType.REGISTER) {
             printerJson.printError(output);
+
+            if (session.getCurrPage().getType() == PageType.LOGIN) {
+                moveToUnauthenticatedHomepage();
+            }
             return;
         }
 
         if (!testValidity()) {
             printerJson.printError(output);
-
-            // Move to Unauthenticated Homepage.
-            ChangeToUnauthenticatedStrategy failedRegisterStrategy
-                    = new ChangeToUnauthenticatedStrategy(session, output);
-            failedRegisterStrategy.changePage();
-
+            moveToUnauthenticatedHomepage();
             return;
         }
 
@@ -51,10 +52,7 @@ public class RegisterCommand implements ICommand {
 
         // Set the new user in the session and move to Authenticated Homepage.
         session.setCurrUser(newUser);
-        ChangeToAuthenticatedStrategy succeededRegisterStrategy
-                = new ChangeToAuthenticatedStrategy(session, output);
-        succeededRegisterStrategy.changePage();
-
+        moveToAuthenticatedHomepage();
         printerJson.printSuccess(session.getCurrMovieList(), session.getCurrUser(), output);
     }
 
@@ -72,5 +70,23 @@ public class RegisterCommand implements ICommand {
             }
         }
         return true;
+    }
+
+    /**
+     * Shortcut to move to Unauthenticated Homepage.
+     */
+    private void moveToUnauthenticatedHomepage() {
+        ChangeToUnauthenticatedStrategy failedRegisterStrategy
+                    = new ChangeToUnauthenticatedStrategy(session, output);
+        failedRegisterStrategy.changePage();
+    }
+
+    /**
+     * Shortcut to move to Authenticated Homepage.
+     */
+    private void moveToAuthenticatedHomepage() {
+        ChangeToAuthenticatedStrategy succeededRegisterStrategy
+                = new ChangeToAuthenticatedStrategy(session, output);
+        succeededRegisterStrategy.changePage();
     }
 }

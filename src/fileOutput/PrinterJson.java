@@ -10,7 +10,7 @@ import database.User;
 import java.util.ArrayList;
 
 public class PrinterJson {
-    private static final ObjectMapper mapper = new ObjectMapper();
+    private final ObjectMapper mapper = new ObjectMapper();
 
     /**
      * Used when changing to Movies or See Details page.
@@ -23,10 +23,10 @@ public class PrinterJson {
 
         message.put("error", (String) null);
 
-        ArrayNode currentMoviesNode = PrinterJson.getMovieArrayNode(currentMoviesList);
+        ArrayNode currentMoviesNode = getMovieArrayNode(currentMoviesList);
         message.set("currentMoviesList", currentMoviesNode);
 
-        ObjectNode currentUser = PrinterJson.getUserNode(user);
+        ObjectNode currentUser = getUserNode(user);
         message.set("currentUser", currentUser);
 
         output.add(message);
@@ -47,7 +47,7 @@ public class PrinterJson {
     /**
      * Converts a user object to an ObjectNode for JSON printing.
      */
-    public static ObjectNode getUserNode(User user) {
+    public ObjectNode getUserNode(User user) {
         ObjectNode userNode = mapper.createObjectNode();
 
         ObjectNode credentialsNode = mapper.createObjectNode();
@@ -82,7 +82,7 @@ public class PrinterJson {
     /**
      * Converts an ArrayList of users to an ArrayNode for JSON printing.
      */
-    public static ArrayNode getUserArrayNode(ArrayList<User> users) {
+    public ArrayNode getUserArrayNode(ArrayList<User> users) {
         ArrayNode userArrayNode = mapper.createArrayNode();
 
         for (User user : users) {
@@ -96,7 +96,7 @@ public class PrinterJson {
     /**
      * Converts a movie object to an ObjectNode for JSON printing.
      */
-    public static ObjectNode getMovieNode(Movie movie) {
+    public ObjectNode getMovieNode(Movie movie) {
         ObjectNode movieNode = mapper.createObjectNode();
 
         movieNode.put("name", movie.getName());
@@ -134,7 +134,7 @@ public class PrinterJson {
     /**
      * Converts an ArrayList of movies to an ArrayNode for JSON printing.
      */
-    public static ArrayNode getMovieArrayNode(ArrayList<Movie> movies) {
+    public ArrayNode getMovieArrayNode(ArrayList<Movie> movies) {
         ArrayNode movieArrayNode = mapper.createArrayNode();
 
         for (Movie movie : movies) {
