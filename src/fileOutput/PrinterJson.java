@@ -13,7 +13,7 @@ public class PrinterJson {
     private final ObjectMapper mapper = new ObjectMapper();
 
     /**
-     * Used when changing to Movies or See Details page.
+     * Used for printing to JSON file in case of a successful action.
      * @param currentMoviesList list of movies visible to the user.
      * @param user current logged-in user.
      * @param output ArrayNode for JSON printing.
@@ -32,6 +32,10 @@ public class PrinterJson {
         output.add(message);
     }
 
+    /**
+     * Used for printing to JSON file in case of a failed action.
+     * @param output ArrayNode for JSON printing.
+     */
     public void printError(ArrayNode output) {
         ObjectNode errorMessage = mapper.createObjectNode();
         errorMessage.put("error", "Error");

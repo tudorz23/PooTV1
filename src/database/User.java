@@ -22,6 +22,19 @@ public class User {
         ratedMovies = new ArrayList<>();
     }
 
+    /**
+     * User uses balance to buy tokens.
+     * @param count number of tokens bought.
+     */
+    public void buyTokens(int count) {
+        this.tokensCount += count;
+
+        int currBalance = this.credentials.getIntBalance();
+        currBalance -= count;
+
+        this.getCredentials().setIntBalance(currBalance);
+    }
+
     /* Getters and Setters */
     public Credentials getCredentials() {
         return credentials;

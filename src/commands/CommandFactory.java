@@ -46,6 +46,9 @@ public class CommandFactory {
             case FILTER -> {
                 return new FilterCommand(session, actionInput, output);
             }
+            case BUY_TOKENS -> {
+                return new BuyTokensCommand(session, actionInput, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }

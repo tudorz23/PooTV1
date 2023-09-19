@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.filterStrategy.*;
 import database.Movie;
 import fileInput.ActionInput;
+import fileInput.FiltersInput;
 import fileOutput.PrinterJson;
 import pages.MoviesPage;
 import utils.PageType;
@@ -22,7 +23,6 @@ public class FilterCommand implements ICommand {
         this.actionInput = actionInput;
         this.output = output;
     }
-
 
     @Override
     public void execute() {
@@ -50,29 +50,31 @@ public class FilterCommand implements ICommand {
     }
 
     /**
-     * Parses the actionInput and generates Strategies for filtering.
+     * Parses the filter input and generates Strategies for filtering.
      * @return ArrayList of Strategies to filter by.
      */
     private ArrayList<IFilterStrategy> getFilterStrategies() {
         ArrayList<IFilterStrategy> filterStrategies = new ArrayList<>();
 
-        if (actionInput.getFilters().getContains() != null) {
-            ArrayList<String> genres = actionInput.getFilters().getContains().getGenre();
+        FiltersInput filters = actionInput.getFilters();
+
+        if (filters.getContains() != null) {
+            ArrayList<String> genres = filters.getContains().getGenre();
             if (genres != null) {
                 IFilterStrategy filterByContainsGenre = new FilterContainsGenreStrategy(session, genres);
                 filterStrategies.add(filterByContainsGenre);
             }
 
-            ArrayList<String> actors = actionInput.getFilters().getContains().getActors();
+            ArrayList<String> actors = filters.getContains().getActors();
             if (actors != null) {
                 IFilterStrategy filterByContainsActor = new FilterContainsActorStrategy(session, actors);
                 filterStrategies.add(filterByContainsActor);
             }
         }
 
-        if (actionInput.getFilters().getSort() != null) {
-            String rating = actionInput.getFilters().getSort().getRating();
-            String duration = actionInput.getFilters().getSort().getDuration();
+        if (filters.getSort() != null) {
+            String rating = filters.getSort().getRating();
+            String duration = filters.getSort().getDuration();
 
             if (rating != null && duration != null) {
                 IFilterStrategy filterByRatingAndDuration =
