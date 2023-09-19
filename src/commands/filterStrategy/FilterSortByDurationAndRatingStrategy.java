@@ -4,31 +4,31 @@ import client.Session;
 import database.Movie;
 import java.util.Comparator;
 
-public class FilterSortByRatingAndDurationStrategy implements IFilterStrategy {
+public class FilterSortByDurationAndRatingStrategy implements IFilterStrategy {
     private Session session;
-    private String ratingOrder;
     private String durationOrder;
+    private String ratingOrder;
 
     /* Constructor */
-    public FilterSortByRatingAndDurationStrategy(Session session, String ratingOrder,
-                                                 String durationOrder) {
+    public FilterSortByDurationAndRatingStrategy(Session session, String durationOrder,
+                                                 String ratingOrder) {
         this.session = session;
-        this.ratingOrder = ratingOrder;
         this.durationOrder = durationOrder;
+        this.ratingOrder = ratingOrder;
     }
 
     @Override
     public void filter() {
-        if (ratingOrder.equals("increasing") && durationOrder.equals("increasing")) {
+        if (durationOrder.equals("increasing") && ratingOrder.equals("increasing")) {
             session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
                     .thenComparingDouble(Movie::getRating));
-        } else if (ratingOrder.equals("decreasing") && durationOrder.equals("increasing")) {
+        } else if (durationOrder.equals("increasing") && ratingOrder.equals("decreasing")) {
             session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
                     .thenComparingDouble(Movie::getRating).reversed());
-        } else if (ratingOrder.equals("increasing") && durationOrder.equals("decreasing")) {
+        } else if (durationOrder.equals("decreasing") && ratingOrder.equals("increasing")) {
             session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
                     .reversed().thenComparingDouble(Movie::getRating));
-        } else if (ratingOrder.equals("decreasing") && durationOrder.equals("decreasing")) {
+        } else if (durationOrder.equals("decreasing") && ratingOrder.equals("decreasing")) {
             session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
                     .reversed().thenComparingDouble(Movie::getRating).reversed());
         }

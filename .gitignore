@@ -3,8 +3,6 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 checkstyle.txt
-src/main/TestWithOutputFolder.java
-src/main/RunSingleTest.java
 
 ### Eclipse ###
 .apt_generated

@@ -35,7 +35,7 @@ public class Movie {
     }
 
     /**
-     * Computes the rating for the movie, by averaging the values from ratingsList.
+     * Computes the rating for the movie, by averaging the values from ratingsMap.
      */
     public void computeRating() {
         if (ratingsMap.isEmpty()) {
@@ -106,8 +106,5 @@ public class Movie {
     }
     public Map<User, Integer> getRatingsMap() {
         return ratingsMap;
-    }
-    public void setRatingsMap(Map<User, Integer> ratingsMap) {
-        this.ratingsMap = ratingsMap;
     }
 }

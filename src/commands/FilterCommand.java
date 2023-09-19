@@ -58,6 +58,19 @@ public class FilterCommand implements ICommand {
 
         FiltersInput filters = actionInput.getFilters();
 
+        getContainsStrategies(filters, filterStrategies);
+        getSortStrategies(filters, filterStrategies);
+
+        return filterStrategies;
+    }
+
+    /**
+     * Checks if any contains filter is specified. If there are, creates Strategies
+     * for them and add them to the general list of filter strategies.
+     * @param filters the input.
+     * @param filterStrategies ArrayList of Strategies to filter by.
+     */
+    private void getContainsStrategies(FiltersInput filters, ArrayList<IFilterStrategy> filterStrategies) {
         if (filters.getContains() != null) {
             ArrayList<String> genres = filters.getContains().getGenre();
             if (genres != null) {
@@ -71,15 +84,23 @@ public class FilterCommand implements ICommand {
                 filterStrategies.add(filterByContainsActor);
             }
         }
+    }
 
+    /**
+     * Checks if any sort filter is specified. If there are, creates Strategies
+     * for them and add them to the general list of filter strategies.
+     * @param filters the input.
+     * @param filterStrategies ArrayList of Strategies to filter by.
+     */
+    private void getSortStrategies(FiltersInput filters, ArrayList<IFilterStrategy> filterStrategies) {
         if (filters.getSort() != null) {
             String rating = filters.getSort().getRating();
             String duration = filters.getSort().getDuration();
 
             if (rating != null && duration != null) {
-                IFilterStrategy filterByRatingAndDuration =
-                        new FilterSortByRatingAndDurationStrategy(session, rating, duration);
-                filterStrategies.add(filterByRatingAndDuration);
+                IFilterStrategy filterSortByDurationAndRating =
+                        new FilterSortByDurationAndRatingStrategy(session, duration, rating);
+                filterStrategies.add(filterSortByDurationAndRating);
             } else if (rating != null) {
                 IFilterStrategy filterSortByRating = new FilterSortByRatingStrategy(session, rating);
                 filterStrategies.add(filterSortByRating);
@@ -88,8 +109,6 @@ public class FilterCommand implements ICommand {
                 filterStrategies.add(filterSortByDuration);
             }
         }
-
-        return filterStrategies;
     }
 
     /**
