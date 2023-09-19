@@ -58,6 +58,9 @@ public class CommandFactory {
             case WATCH -> {
                 return new WatchCommand(session, output);
             }
+            case LIKE -> {
+                return new LikeCommand(session, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }
