@@ -20,17 +20,17 @@ public class FilterSortByRatingAndDurationStrategy implements IFilterStrategy {
     @Override
     public void filter() {
         if (ratingOrder.equals("increasing") && durationOrder.equals("increasing")) {
-            session.getCurrMovieList().sort(Comparator.comparingDouble(Movie::getRating)
-                    .thenComparingInt(Movie::getDuration));
+            session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
+                    .thenComparingDouble(Movie::getRating));
         } else if (ratingOrder.equals("decreasing") && durationOrder.equals("increasing")) {
-            session.getCurrMovieList().sort(Comparator.comparingDouble(Movie::getRating)
-                    .reversed().thenComparingInt(Movie::getDuration));
+            session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
+                    .thenComparingDouble(Movie::getRating).reversed());
         } else if (ratingOrder.equals("increasing") && durationOrder.equals("decreasing")) {
-            session.getCurrMovieList().sort(Comparator.comparingDouble(Movie::getRating)
-                    .thenComparingInt(Movie::getDuration).reversed());
+            session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
+                    .reversed().thenComparingDouble(Movie::getRating));
         } else if (ratingOrder.equals("decreasing") && durationOrder.equals("decreasing")) {
-            session.getCurrMovieList().sort(Comparator.comparingDouble(Movie::getRating)
-                    .reversed().thenComparingInt(Movie::getDuration).reversed());
+            session.getCurrMovieList().sort(Comparator.comparingInt(Movie::getDuration)
+                    .reversed().thenComparingDouble(Movie::getRating).reversed());
         }
     }
 }

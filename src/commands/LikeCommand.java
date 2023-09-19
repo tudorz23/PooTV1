@@ -35,6 +35,10 @@ public class LikeCommand implements ICommand {
 
         currUser.getLikedMovies().add(movie);
 
+        int currNumLikes = movie.getNumLikes();
+        currNumLikes++;
+        movie.setNumLikes(currNumLikes);
+
         printerJson.printSuccess(session.getCurrMovieList(), session.getCurrUser(), output);
     }
 

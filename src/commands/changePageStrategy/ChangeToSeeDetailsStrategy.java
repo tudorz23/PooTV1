@@ -60,12 +60,12 @@ public class ChangeToSeeDetailsStrategy implements IChangePageStrategy {
     }
 
     /**
-     * Selects the movie with the respective title from the movies page's list (which is also
-     * current page) and sets it as new page's movie and session's current movie.
+     * Selects the movie with the respective title from the currently displayed movie list
+     * and sets it as new page's movie and session's current movie.
      * @return true if the movie is found, false otherwise.
      */
     private boolean copyMovie() {
-        for (Movie movie : ((MoviesPage) session.getCurrPage()).getMovies()) {
+        for (Movie movie : session.getCurrMovieList()) {
             if (movie.getName().equals(movieName)) {
                 ((SeeDetailsPage) newPage).setMovie(movie);
                 break;

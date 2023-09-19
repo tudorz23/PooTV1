@@ -16,7 +16,7 @@ public class MoviesPage extends Page{
         setType(PageType.MOVIES);
 
         getNextPages().addAll(Arrays.asList(PageType.AUTHENTICATED, PageType.SEE_DETAILS,
-                                                PageType.UNAUTHENTICATED));
+                                                PageType.UNAUTHENTICATED, PageType.MOVIES));
     }
 
     /* Getters and Setters */
