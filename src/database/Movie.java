@@ -2,7 +2,11 @@ package database;
 
 import fileInput.MovieInput;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.OptionalDouble;
 
 public class Movie {
     private String name;
@@ -14,6 +18,7 @@ public class Movie {
     private int numLikes;
     private double rating;
     private int numRatings;
+    private Map<User, Integer> ratingsMap;
 
     /* Constructor */
     public Movie(MovieInput movieInput) {
@@ -26,6 +31,22 @@ public class Movie {
         numLikes = 0;
         rating = 0;
         numRatings = 0;
+        ratingsMap = new HashMap<>();
+    }
+
+    /**
+     * Computes the rating for the movie, by averaging the values from ratingsList.
+     */
+    public void computeRating() {
+        if (ratingsMap.isEmpty()) {
+            rating = 0;
+            return;
+        }
+
+        rating = ratingsMap.values().stream()
+                .mapToDouble(Integer::doubleValue)
+                .average()
+                .orElse(0);
     }
 
     /* Getters and Setters */
@@ -82,5 +103,11 @@ public class Movie {
     }
     public void setNumRatings(int numRatings) {
         this.numRatings = numRatings;
+    }
+    public Map<User, Integer> getRatingsMap() {
+        return ratingsMap;
+    }
+    public void setRatingsMap(Map<User, Integer> ratingsMap) {
+        this.ratingsMap = ratingsMap;
     }
 }

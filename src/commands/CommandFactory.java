@@ -61,6 +61,9 @@ public class CommandFactory {
             case LIKE -> {
                 return new LikeCommand(session, output);
             }
+            case RATE -> {
+                return new RateCommand(session, actionInput, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }
