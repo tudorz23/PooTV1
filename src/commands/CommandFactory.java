@@ -52,6 +52,9 @@ public class CommandFactory {
             case BUY_PREMIUM_ACCOUNT -> {
                 return new BuyPremiumAccountCommand(session, output);
             }
+            case PURCHASE -> {
+                return new PurchaseCommand(session, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }

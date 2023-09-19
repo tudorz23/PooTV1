@@ -2,7 +2,6 @@ package commands;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import fileInput.ActionInput;
 import fileOutput.PrinterJson;
 import utils.PageType;
 
@@ -31,7 +30,7 @@ public class BuyPremiumAccountCommand implements ICommand {
     }
 
     /**
-     * Tests if the Buy TPremium Account action is valid.
+     * Tests if the Buy Premium Account action is valid.
      * @return true if valid, false otherwise.
      */
     private boolean testValidity() {
