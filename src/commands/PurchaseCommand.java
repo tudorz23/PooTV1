@@ -22,7 +22,6 @@ public class PurchaseCommand implements ICommand {
         this.output = output;
     }
 
-
     @Override
     public void execute() {
         PrinterJson printerJson = new PrinterJson();
@@ -35,11 +34,15 @@ public class PurchaseCommand implements ICommand {
         if (currUser.getCredentials().getAccountType().equals("standard")) {
             if (!purchaseFromStandardAccount()) {
                 printerJson.printError(output);
+                return;
             }
+            printerJson.printSuccess(session.getCurrMovieList(), session.getCurrUser(), output);
         } else if (currUser.getCredentials().getAccountType().equals("premium")) {
             if (!purchaseFromPremiumAccount()) {
                 printerJson.printError(output);
+                return;
             }
+            printerJson.printSuccess(session.getCurrMovieList(), session.getCurrUser(), output);
         }
     }
 

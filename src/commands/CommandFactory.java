@@ -55,6 +55,9 @@ public class CommandFactory {
             case PURCHASE -> {
                 return new PurchaseCommand(session, output);
             }
+            case WATCH -> {
+                return new WatchCommand(session, output);
+            }
             default -> throw new IllegalArgumentException("Command not yet implemented.");
         }
     }
