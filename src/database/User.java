@@ -2,6 +2,8 @@ package database;
 
 import java.util.ArrayList;
 
+import static utils.Constants.PREMIUM_ACCOUNT_PRICE;
+
 public class User {
     private Credentials credentials;
     private int tokensCount;
@@ -25,14 +27,40 @@ public class User {
     /**
      * User uses balance to buy tokens.
      * @param count number of tokens bought.
+     * @return true if operation can be done, false otherwise.
      */
-    public void buyTokens(int count) {
+    public boolean buyTokens(int count) {
+        int currBalance = this.credentials.getIntBalance();
+
+        if (count > currBalance) {
+            return false;
+        }
+
         this.tokensCount += count;
 
-        int currBalance = this.credentials.getIntBalance();
         currBalance -= count;
-
         this.getCredentials().setIntBalance(currBalance);
+
+        return true;
+    }
+
+    /**
+     * User uses tokens to buy premium account.
+     * @return true if operation can be done, false otherwise.
+     */
+    public boolean buyPremiumAccount() {
+        if (this.getCredentials().getAccountType().equals("premium")) {
+            return false;
+        }
+
+        if (PREMIUM_ACCOUNT_PRICE > this.tokensCount)  {
+            return false;
+        }
+
+        this.tokensCount -= PREMIUM_ACCOUNT_PRICE;
+        this.getCredentials().setAccountType("premium");
+
+        return true;
     }
 
     /* Getters and Setters */

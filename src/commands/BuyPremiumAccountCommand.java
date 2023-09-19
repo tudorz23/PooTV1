@@ -6,16 +6,13 @@ import fileInput.ActionInput;
 import fileOutput.PrinterJson;
 import utils.PageType;
 
-public class BuyTokensCommand implements ICommand {
+public class BuyPremiumAccountCommand implements ICommand {
     private Session session;
-    private ActionInput actionInput;
-    private int count;
     private ArrayNode output;
 
     /* Constructor */
-    public BuyTokensCommand(Session session, ActionInput actionInput, ArrayNode output) {
+    public BuyPremiumAccountCommand(Session session, ArrayNode output) {
         this.session = session;
-        this.actionInput = actionInput;
         this.output = output;
     }
 
@@ -28,13 +25,13 @@ public class BuyTokensCommand implements ICommand {
             return;
         }
 
-        if (!session.getCurrUser().buyTokens(count)) {
+        if (!session.getCurrUser().buyPremiumAccount()) {
             printerJson.printError(output);
         }
     }
 
     /**
-     * Tests if the Buy Tokens action is valid.
+     * Tests if the Buy TPremium Account action is valid.
      * @return true if valid, false otherwise.
      */
     private boolean testValidity() {
@@ -42,17 +39,6 @@ public class BuyTokensCommand implements ICommand {
         if (session.getCurrPage().getType() != PageType.UPGRADES) {
             return false;
         }
-
-        if (actionInput.getCount() == null) {
-            return false;
-        }
-
-        try {
-            this.count = Integer.parseInt(actionInput.getCount());
-        } catch (NumberFormatException nfe) {
-            return false;
-        }
-
         return true;
     }
 }
