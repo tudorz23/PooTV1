@@ -1,6 +1,6 @@
 package fileInput;
 
-public class CredentialsInput {
+public final class CredentialsInput {
     private String name;
     private String password;
     private String accountType;
