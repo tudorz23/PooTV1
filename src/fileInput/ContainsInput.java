@@ -2,7 +2,7 @@ package fileInput;
 
 import java.util.ArrayList;
 
-public class ContainsInput {
+public final class ContainsInput {
     private ArrayList<String> actors;
     private ArrayList<String> genre;
 

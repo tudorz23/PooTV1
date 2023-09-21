@@ -1,6 +1,6 @@
 package fileInput;
 
-public class FiltersInput {
+public final class FiltersInput {
     private SortInput sort;
     private ContainsInput contains;
 

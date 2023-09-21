@@ -2,7 +2,6 @@ package commands;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import database.Database;
 import fileInput.ActionInput;
 import utils.CommandType;
 
@@ -16,6 +15,11 @@ public class CommandFactory {
         this.output = output;
     }
 
+    /**
+     * Factory method that creates ICommand instances, based on the actionInput.
+     * @param actionInput key that decides the type of instance that is created.
+     * @return ICommand object.
+     */
     public ICommand getCommand(ActionInput actionInput) {
         // If it is a "change page" command.
         if (actionInput.getType().equals("change page")) {
@@ -64,7 +68,7 @@ public class CommandFactory {
             case RATE -> {
                 return new RateCommand(session, actionInput, output);
             }
-            default -> throw new IllegalArgumentException("Command not yet implemented.");
+            default -> throw new IllegalArgumentException("Command is not supported.");
         }
     }
 }

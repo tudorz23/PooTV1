@@ -2,7 +2,7 @@ package fileInput;
 
 import java.util.ArrayList;
 
-public class Input {
+public final class Input {
     private ArrayList<UserInput> users;
     private ArrayList<MovieInput> movies;
     private ArrayList<ActionInput> actions;

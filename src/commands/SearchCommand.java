@@ -14,7 +14,7 @@ public class SearchCommand implements ICommand {
     private ArrayNode output;
 
     /* Constructor */
-    public SearchCommand(Session session, ActionInput actionInput ,ArrayNode output) {
+    public SearchCommand(Session session, ActionInput actionInput, ArrayNode output) {
         this.session = session;
         this.actionInput = actionInput;
         this.output = output;

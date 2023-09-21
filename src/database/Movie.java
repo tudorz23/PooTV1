@@ -1,14 +1,11 @@
 package database;
 
 import fileInput.MovieInput;
-
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.OptionalDouble;
 
-public class Movie {
+public final class Movie {
     private String name;
     private int year;
     private int duration;

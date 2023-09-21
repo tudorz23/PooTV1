@@ -2,7 +2,7 @@ package database;
 
 import java.util.ArrayList;
 
-public class Database {
+public final class Database {
     private ArrayList<User> registeredUsers;
     private ArrayList<Movie> availableMovies;
 

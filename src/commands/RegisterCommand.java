@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.changePageStrategy.ChangeToAuthenticatedStrategy;
 import commands.changePageStrategy.ChangeToUnauthenticatedStrategy;
 import database.Credentials;
-import database.Database;
 import database.User;
 import fileInput.ActionInput;
 import fileInput.CredentialsInput;

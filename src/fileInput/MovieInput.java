@@ -2,7 +2,7 @@ package fileInput;
 
 import java.util.ArrayList;
 
-public class MovieInput {
+public final class MovieInput {
     private String name;
     private int year;
     private int duration;

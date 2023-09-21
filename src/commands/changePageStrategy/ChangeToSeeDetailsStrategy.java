@@ -4,13 +4,10 @@ import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import database.Movie;
 import fileOutput.PrinterJson;
-import pages.MoviesPage;
 import pages.Page;
 import pages.PageFactory;
 import pages.SeeDetailsPage;
 import utils.PageType;
-
-import java.util.ArrayList;
 
 public class ChangeToSeeDetailsStrategy implements IChangePageStrategy {
     private Session session;

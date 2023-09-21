@@ -6,7 +6,7 @@ import utils.PageType;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MoviesPage extends Page{
+public class MoviesPage extends Page {
     private ArrayList<Movie> movies;
 
     /* Constructor */

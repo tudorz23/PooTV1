@@ -1,10 +1,11 @@
 package database;
 
 import java.util.ArrayList;
-
+import java.util.Objects;
+import static utils.Constants.INITIAL_FREE_PREMIUM_MOVIES;
 import static utils.Constants.PREMIUM_ACCOUNT_PRICE;
 
-public class User {
+public final class User {
     private Credentials credentials;
     private int tokensCount;
     private int numFreePremiumMovies;
@@ -17,7 +18,7 @@ public class User {
     public User(Credentials credentials) {
         this.credentials = credentials;
         tokensCount = 0;
-        numFreePremiumMovies = 15;
+        numFreePremiumMovies = INITIAL_FREE_PREMIUM_MOVIES;
         purchasedMovies = new ArrayList<>();
         watchedMovies = new ArrayList<>();
         likedMovies = new ArrayList<>();
@@ -61,6 +62,23 @@ public class User {
         this.getCredentials().setAccountType("premium");
 
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User user)) {
+            return false;
+        }
+        return getCredentials().getName().equals(user.getCredentials().getName())
+                && getCredentials().getPassword().equals(user.getCredentials().getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getCredentials().getName(), getCredentials().getPassword());
     }
 
     /* Getters and Setters */

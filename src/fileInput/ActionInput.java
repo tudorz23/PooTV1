@@ -1,6 +1,6 @@
 package fileInput;
 
-public class ActionInput {
+public final class ActionInput {
     private String type;
     private String page;
     private String movie;

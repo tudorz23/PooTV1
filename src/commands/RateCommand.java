@@ -9,6 +9,9 @@ import fileOutput.PrinterJson;
 import pages.SeeDetailsPage;
 import utils.PageType;
 
+import static utils.Constants.MAX_RATING;
+import static utils.Constants.MIN_RATING;
+
 public class RateCommand implements ICommand {
     private Session session;
     private ActionInput actionInput;
@@ -33,7 +36,7 @@ public class RateCommand implements ICommand {
         }
 
         int newRating = actionInput.getRate();
-        if (newRating < 1 || newRating > 5) {
+        if (newRating < MIN_RATING || newRating > MAX_RATING) {
             printerJson.printError(output);
             return;
         }

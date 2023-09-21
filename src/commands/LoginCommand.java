@@ -4,12 +4,10 @@ import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import commands.changePageStrategy.ChangeToAuthenticatedStrategy;
 import commands.changePageStrategy.ChangeToUnauthenticatedStrategy;
-import database.Database;
 import database.User;
 import fileInput.ActionInput;
 import fileInput.CredentialsInput;
 import fileOutput.PrinterJson;
-import pages.LoginPage;
 import utils.PageType;
 
 public class LoginCommand implements ICommand {

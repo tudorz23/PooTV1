@@ -1,6 +1,6 @@
 package fileInput;
 
-public class UserInput {
+public final class UserInput {
     private CredentialsInput credentials;
 
     /* Getters and Setters */

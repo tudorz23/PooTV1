@@ -7,7 +7,7 @@ import pages.Page;
 import pages.PageFactory;
 import utils.PageType;
 
-public class ChangeToUnauthenticatedStrategy implements IChangePageStrategy{
+public class ChangeToUnauthenticatedStrategy implements IChangePageStrategy {
     private Session session;
     private ArrayNode output;
     private Page newPage;

@@ -2,7 +2,6 @@ package commands.changePageStrategy;
 
 import client.Session;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import database.Database;
 import database.Movie;
 import database.User;
 import fileOutput.PrinterJson;

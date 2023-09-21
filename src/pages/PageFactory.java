@@ -3,6 +3,11 @@ package pages;
 import utils.PageType;
 
 public class PageFactory {
+    /**
+     * Factory method that creates Page instances based on the PageType enum input.
+     * @param type PageType enum.
+     * @return Page object corresponding to the type input.
+     */
     public Page createPage(PageType type) {
         switch (type) {
             case UNAUTHENTICATED -> {
