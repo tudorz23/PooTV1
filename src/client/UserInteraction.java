@@ -81,7 +81,13 @@ public final class UserInteraction {
      * @param actionInput the current action.
      */
     private void executeAction(ActionInput actionInput) {
-        ICommand command = commandFactory.getCommand(actionInput);
+        ICommand command;
+
+        try {
+            command = commandFactory.getCommand(actionInput);
+        } catch (IllegalArgumentException iae) {
+            return;
+        }
 
         invoker.execute(command);
     }

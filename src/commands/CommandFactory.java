@@ -19,8 +19,9 @@ public class CommandFactory {
      * Factory method that creates ICommand instances, based on the actionInput.
      * @param actionInput key that decides the type of instance that is created.
      * @return ICommand object.
+     * @throws IllegalArgumentException if command is not supported.
      */
-    public ICommand getCommand(ActionInput actionInput) {
+    public ICommand getCommand(ActionInput actionInput) throws IllegalArgumentException {
         // If it is a "change page" command.
         if (actionInput.getType().equals("change page")) {
             return new ChangePageCommand(session, actionInput, output);
