@@ -9,7 +9,7 @@ import utils.PageType;
 
 import java.util.ArrayList;
 
-public class Session {
+public final class Session {
     private User currUser;
     private Page currPage;
     private ArrayList<Movie> currMovieList;

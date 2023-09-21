@@ -1,7 +1,6 @@
 package client;
 
 import commands.ICommand;
-
 import java.util.LinkedList;
 
 /**

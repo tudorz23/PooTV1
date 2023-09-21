@@ -18,10 +18,7 @@ public class Main {
 
         ArrayNode output = objectMapper.createArrayNode();
 
-        // !!!!
-        ObjectNode dummyOutput = objectMapper.createObjectNode();
-
-        UserInteraction userInteraction = new UserInteraction(input, output, dummyOutput);
+        UserInteraction userInteraction = new UserInteraction(input, output);
         userInteraction.startUserInteraction();
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();

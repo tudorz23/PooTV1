@@ -1,7 +1,6 @@
 package client;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import commands.CommandFactory;
 import commands.ICommand;
 import database.Database;
@@ -12,9 +11,8 @@ import fileInput.ActionInput;
 import fileInput.Input;
 import fileInput.MovieInput;
 import fileInput.UserInput;
-import fileOutput.PrinterJson;
 
-public class UserInteraction {
+public final class UserInteraction {
     private Session session;
     private Database database;
     private Invoker invoker;
@@ -23,31 +21,29 @@ public class UserInteraction {
 
     private final Input input;
     private ArrayNode output;
-    private ObjectNode dummyOutput;
 
     /* Constructor */
-    public UserInteraction(Input input, ArrayNode output, ObjectNode dummyOutput) {
+    public UserInteraction(Input input, ArrayNode output) {
         this.input = input;
         this.output = output;
-        this.dummyOutput = dummyOutput;
         invoker = new Invoker();
     }
 
+    /**
+     * Entry point to the program.
+     */
     public void startUserInteraction() {
         prepareDatabase();
         initSession();
         commandFactory = new CommandFactory(session, output);
-        parseActions();
-        // printDatabase();
+        startActions();
         reset();
     }
 
     /**
-     * Instantiates the global Singleton Database and
-     * populates it with data taken from the input.
+     * Populates the database with data taken from the input.
      */
     public void prepareDatabase() {
-        // First call of Database.getInstance().
         this.database = new Database();
 
         // Populate database with registered users.
@@ -64,17 +60,8 @@ public class UserInteraction {
         }
     }
 
-    public void printDatabase() {
-        PrinterJson printerJson = new PrinterJson();
-        ArrayNode registeredUsers = printerJson.getUserArrayNode(database.getRegisteredUsers());
-        dummyOutput.set("users", registeredUsers);
-
-        ArrayNode availableMovies = printerJson.getMovieArrayNode(database.getAvailableMovies());
-        dummyOutput.set("movies", availableMovies);
-    }
-
     /**
-     * Clears the database and the command list for the next tests.
+     * Clears the command list for the next tests.
      */
     public void reset() {
         invoker.reset();
@@ -83,12 +70,16 @@ public class UserInteraction {
     /**
      * Iterates through the actions from the input.
      */
-    public void parseActions() {
+    public void startActions() {
         for (ActionInput actionInput : input.getActions()) {
             executeAction(actionInput);
         }
     }
 
+    /**
+     * Calls the Command Factory to generate command based on the actionInput.
+     * @param actionInput the current action.
+     */
     private void executeAction(ActionInput actionInput) {
         ICommand command = commandFactory.getCommand(actionInput);
 
