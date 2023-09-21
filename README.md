@@ -36,8 +36,7 @@ printed at the output.
 * The following scheme presents the supported pages and actions, but also which
 pages can be accessed from any given page.
 * In **bold** will be **pages**, while in *italic* will be *actions*.
-<br/>
-<br/>
+
 * **Unauthenticated Homepage** - starting page of the program
   * **Login** - login page for an already registered user
     * *login* - the explicit login *action*
@@ -61,7 +60,7 @@ pages can be accessed from any given page.
     * **Movies**
     * **Unauthenticated Homepage** - logging out
     * *Buy premium account*
-    * *But tokens*
+    * *Buy tokens*
   * **Unauthenticated Homepage** - logging out
 
 ---
